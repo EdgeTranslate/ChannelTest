@@ -25,8 +25,7 @@
      * @param {String} event event to handle
      * @param {Function} handler event handler, accepts two arguments:
      *                           detail: event detail
-     *                           source: source of the event, might be "options", "popup",
-     *                           chrome.runtime.MessageSender object or null
+     *                           source: source of the event, chrome.runtime.MessageSender object
      * @returns {Function} a canceler that will remove the handler when called
      */
     addHandler(event, handler) {

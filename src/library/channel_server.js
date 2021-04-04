@@ -2,11 +2,6 @@ import EventManager from "./event.js";
 
 /**
  * Communication channel for background communicating with popup, options and content scripts.
- *
- * @property {Function} provide
- * @property {Function} dispatch
- * @property {Function} dispatchToTabs
- * @property {Function} on
  */
 class Channel {
     constructor() {
@@ -104,8 +99,7 @@ class Channel {
      * @param {String} event event to handle
      * @param {Function} handler event handler, accepts two arguments:
      *                           detail: event detail
-     *                           source: source of the event, might be "options", "popup",
-     *                                   chrome.runtime.MessageSender object or null
+     *                           source: source of the event, chrome.runtime.MessageSender object
      * @returns {Function} a canceler that will remove the handler when called
      */
     on(event, handler) {
@@ -117,7 +111,7 @@ class Channel {
      *
      * @param {String} service service
      * @param {Any} params service parameters
-     * @param {String | chrome.runtime.MessageSender | null} client client that requested the service
+     * @param {chrome.runtime.MessageSender} client client that requested the service
      * @returns {Any} handle result
      */
     _handleService(service, params, client) {
