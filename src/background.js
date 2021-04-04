@@ -4,19 +4,31 @@ const channel = new Channel();
 
 channel.provide("get_url", () => chrome.runtime.getURL(""));
 
-channel.on("content_loaded", (detail, sender) => {
+const cCanceler = channel.on("content_loaded", (detail, sender) => {
     console.log(`content: ${detail}`);
     channel.dispatchToTabs(sender.tab.id, "hello_content", detail);
+    cCanceler();
+
+    // This should generate a warning.
+    cCanceler();
 });
 
-channel.on("options_loaded", (detail) => {
+const oCanceler = channel.on("options_loaded", (detail) => {
     console.log(`options: ${detail}`);
     channel.dispatch("hello_options", detail);
+    oCanceler();
+
+    // This should generate a warning.
+    oCanceler();
 });
 
-channel.on("popup_loaded", (detail) => {
+const pCanceler = channel.on("popup_loaded", (detail) => {
     console.log(`popup: ${detail}`);
     channel.dispatch("hello_popup", detail);
+    pCanceler();
+
+    // This should generate a warning.
+    pCanceler();
 });
 
 const promise1 = new Promise((resolve, reject) => {
