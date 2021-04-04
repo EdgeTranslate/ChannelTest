@@ -1,0 +1,21 @@
+{
+  "name": "channel_test",
+  "version": "0.0.1",
+  "description": "Extension for testing Edge Translate channel components.",
+  "contributors": [
+    {
+      "name": "nickyc975",
+      "email": "chenjinlong2016@outlook.com",
+      "url": "https://github.com/nickyc975"
+    }
+  ],
+  "scripts": {
+    "build": "gulp build"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "webpack": "^4.46.0",
+    "webpack-stream": "^6.1.2"
+  }
+}
