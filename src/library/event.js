@@ -38,7 +38,16 @@
             this._eventToHandlerIDs.set(event, new Set([handlerID]));
         }
 
-        return (() => this._removeHandler(event, handlerID)).bind(this);
+        // Each canceler should be called only once.
+        let canceled = false;
+        return (() => {
+            if (!canceled) {
+                canceled = true;
+                this._removeHandler(event, handlerID);
+            } else {
+                console.warn("You shouldn't call the canceler more than once!");
+            }
+        }).bind(this);
     }
 
     /**
