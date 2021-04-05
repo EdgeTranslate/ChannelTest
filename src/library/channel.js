@@ -89,9 +89,9 @@ class Channel {
     /**
      * Send a request to the specified tab and get a response.
      *
-     * @param {*} tabId tab id
-     * @param {*} service service
-     * @param {*} params service parameters
+     * @param {Number} tabId tab id
+     * @param {String} service service
+     * @param {Any} params service parameters
      * @returns {Promise<Any>} promise of the response
      */
     requestToTab(tabId, service, params) {
