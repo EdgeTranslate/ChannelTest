@@ -10,5 +10,5 @@ const canceler = channel.on("hello_popup", (result) => {
 });
 
 channel.request("get_url", {}).then((result) => {
-    channel.dispatch("popup_loaded", result);
+    channel.emit("popup_loaded", result);
 });

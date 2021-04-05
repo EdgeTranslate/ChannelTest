@@ -8,5 +8,5 @@ const canceler = channel.on("hello_content", (result) => {
 });
 
 channel.request("get_url", {}).then((result) => {
-    channel.dispatch("content_loaded", result);
+    channel.emit("content_loaded", result);
 });

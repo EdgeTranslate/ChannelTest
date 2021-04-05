@@ -10,5 +10,5 @@ const canceler = channel.on("hello_options", (result) => {
 });
 
 channel.request("get_url", {}).then((result) => {
-    channel.dispatch("options_loaded", result);
+    channel.emit("options_loaded", result);
 });

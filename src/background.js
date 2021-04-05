@@ -6,7 +6,7 @@ channel.provide("get_url", () => chrome.runtime.getURL(""));
 
 const cCanceler = channel.on("content_loaded", (detail, sender) => {
     console.log(`content: ${detail}`);
-    channel.dispatchToTabs(sender.tab.id, "hello_content", detail);
+    channel.emitToTabs(sender.tab.id, "hello_content", detail);
     cCanceler();
 
     // This should generate a warning.
@@ -15,7 +15,7 @@ const cCanceler = channel.on("content_loaded", (detail, sender) => {
 
 const oCanceler = channel.on("options_loaded", (detail) => {
     console.log(`options: ${detail}`);
-    channel.dispatch("hello_options", detail);
+    channel.emit("hello_options", detail);
     oCanceler();
 
     // This should generate a warning.
@@ -24,7 +24,7 @@ const oCanceler = channel.on("options_loaded", (detail) => {
 
 const pCanceler = channel.on("popup_loaded", (detail) => {
     console.log(`popup: ${detail}`);
-    channel.dispatch("hello_popup", detail);
+    channel.emit("hello_popup", detail);
     pCanceler();
 
     // This should generate a warning.
@@ -53,6 +53,6 @@ const promise2 = new Promise((resolve, reject) => {
 
 Promise.all([promise1, promise2]).then(() => {
     setTimeout(() => {
-        channel.dispatch("loaded", {});
+        channel.emit("loaded", {});
     }, 5000);
 });
