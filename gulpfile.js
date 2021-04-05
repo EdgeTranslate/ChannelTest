@@ -1,13 +1,25 @@
 const del = require("del");
 const gulp = require("gulp");
+const minimist = require("minimist");
 const webpack = require("webpack");
 const webpack_stream = require("webpack-stream");
+
+/**
+ * Build target browser.
+ */
+const BROWSER = minimist(process.argv.slice(2)).browser || "chrome";
 
 /**
  * Constants.
  */
 const OUTPUT_DIR = "build/";
 const WEBPACK_CONFIG = require("./webpack.config.js");
+
+/**
+ * Webpack plugins.
+ */
+WEBPACK_CONFIG.plugins = WEBPACK_CONFIG.plugins || [];
+WEBPACK_CONFIG.plugins.push(new webpack.DefinePlugin({ BROWSER_ENV: JSON.stringify(BROWSER) }));
 
 /**
  * Build project.

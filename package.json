@@ -10,11 +10,13 @@
     }
   ],
   "scripts": {
-    "build": "gulp build"
+    "chrome": "gulp build --browser chrome",
+    "firefox": "gulp build --browser firefox"
   },
   "devDependencies": {
     "del": "^6.0.0",
     "gulp": "^4.0.2",
+    "minimist": "^1.2.5",
     "webpack": "^4.46.0",
     "webpack-stream": "^6.1.2"
   }
