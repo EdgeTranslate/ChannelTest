@@ -2,7 +2,7 @@ import Channel from "./library/channel.js";
 
 const channel = new Channel();
 
-channel.provide("get_title", () => document.title);
+channel.provide("get_title", () => Promise.resolve(document.title));
 
 const canceler = channel.on("hello_content", (result) => {
     alert(result);

@@ -2,7 +2,7 @@ import Channel from "./library/channel.js";
 
 const channel = new Channel();
 
-channel.provide("get_url", () => chrome.runtime.getURL(""));
+channel.provide("get_url", () => Promise.resolve(chrome.runtime.getURL("")));
 
 const cCanceler = channel.on("content_loaded", (detail, sender) => {
   channel
