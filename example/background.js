@@ -1,4 +1,4 @@
-import Channel from "./library/channel.js";
+import Channel from "../src/channel.js";
 
 const channel = new Channel();
 

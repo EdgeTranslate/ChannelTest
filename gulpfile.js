@@ -19,7 +19,9 @@ const WEBPACK_CONFIG = require("./webpack.config.js");
  * Webpack plugins.
  */
 WEBPACK_CONFIG.plugins = WEBPACK_CONFIG.plugins || [];
-WEBPACK_CONFIG.plugins.push(new webpack.DefinePlugin({ BROWSER_ENV: JSON.stringify(BROWSER) }));
+WEBPACK_CONFIG.plugins.push(
+  new webpack.DefinePlugin({ BROWSER_ENV: JSON.stringify(BROWSER) })
+);
 
 /**
  * Build project.
@@ -38,7 +40,7 @@ function clean() {
  */
 function js() {
   return gulp
-    .src("./src/**/*.js", { base: "src" })
+    .src("(src|example)/**/*.js", { base: "example" })
     .pipe(webpack_stream(WEBPACK_CONFIG, webpack))
     .pipe(gulp.dest(OUTPUT_DIR))
     .on("error", (error) => process.stderr.write(`${error}\n`));
@@ -49,7 +51,7 @@ function js() {
  */
 function static() {
   return gulp
-    .src(["./src/**/!(*.js)"], { base: "src" })
+    .src("example/**/!(*.js)", { base: "example" })
     .pipe(gulp.dest(OUTPUT_DIR));
 }
 
@@ -59,7 +61,7 @@ function static() {
  * @param {Function} done execute done to inform gulp that the task is finished
  */
 function watcher(done) {
-  gulp.watch("src/**/*.js").on("change", gulp.series(js));
-  gulp.watch("src/**/!(*.js)").on("change", gulp.series(static));
+  gulp.watch("(src|example)/**/*.js").on("change", gulp.series(js));
+  gulp.watch("example/**/!(*.js)").on("change", gulp.series(static));
   done();
 }

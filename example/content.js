@@ -1,14 +1,14 @@
-import Channel from "./library/channel.js";
+import Channel from "../src/channel.js";
 
 const channel = new Channel();
 
 channel.provide("get_title", () => Promise.resolve(document.title));
 
 const canceler = channel.on("hello_content", (result) => {
-    alert(result);
-    canceler();
+  alert(result);
+  canceler();
 });
 
 channel.request("get_url", {}).then((result) => {
-    channel.emit("content_loaded", result);
+  channel.emit("content_loaded", result);
 });
